@@ -1,0 +1,5 @@
+block_queue.cc: In function ‘int main()’:
+block_queue.cc:33:5: error: expected ‘;’ before ‘pthread_join’
+     pthread_join(p, nullptr);
+     ^
+make: *** [block_queue] Error 1
