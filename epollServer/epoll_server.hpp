@@ -119,7 +119,6 @@ public:
                         cout << "有新链接到来..." << endl;
                         ev.events = EPOLLIN;
                         ev.data.fd = sock;
-                        //ev.data.ptr = new context(fd);
                         //将新的事件添加到rb,user->OS
                         epoll_ctl(epfd, EPOLL_CTL_ADD, sock, &ev);
                     }
@@ -128,6 +127,11 @@ public:
                 {
                     //处理常规读取数据事件
                     char buffer[10240];
+                    //这里是有bug的
+                    //假如说一次没有读完，等下一次读的时候需要把数据连接上，但是下一次读
+                    //空间已经释放，即使是全局变量，在下一次读的时候，万一该文件描述符
+                    //没有就绪，另外的文件描述符对应的读就会将空间覆盖，造成数据丢失
+                    //可以用ptr指针来指向一个专门的对象来存放读取的数据
                     ssize_t s = recv(fd, buffer, sizeof(buffer)-1, 0);
                     if (s > 0)
                     {
@@ -140,6 +144,7 @@ public:
                         //2. switch event
                         ev.events = EPOLLOUT;
                         ev.data.fd = fd;
+                        //ev.data.ptr = new context(fd);
                         epoll_ctl(epfd, EPOLL_CTL_MOD, fd, &ev);
                         continue;
                     }
