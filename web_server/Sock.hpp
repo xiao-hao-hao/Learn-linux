@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "strings.h"
+#include <strings.h>
 #include "Log.hpp"
 
 class Sock

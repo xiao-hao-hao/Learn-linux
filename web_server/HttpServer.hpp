@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <pthread.h>
-#include "Protocol.h"
+#include "Protocol.hpp"
 #include "Sock.hpp"
 #include "Log.hpp"
 

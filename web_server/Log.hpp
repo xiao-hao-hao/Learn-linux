@@ -9,6 +9,7 @@
 #define SOCKET_CREATE 2
 #define BIND_ERROR 3
 #define LISTEN_ERROR 4
+#define NORMAL_ERR -1
 
 //log error level
 #define Normal 1
@@ -50,4 +51,4 @@ void Log(std::string level, std::string msg, std::string model, int number)
 
 }
 
-#define LOG(ERR_LEVEL, MESSAGE) Log(#ERR_LEVEL, MESSAGE, __FILE__, __LINE__);
+#define LOG(ERR_LEVEL, MESSAGE) Log(#ERR_LEVEL, MESSAGE, __FILE__, __LINE__)
