@@ -8,15 +8,15 @@
 class Util
 {
 public:
-    static void MakeKV(std::unordered_map<std::string, std::string> &header_kv, std::string &sub)
+    static void MakeKV(std::unordered_map<std::string, std::string> &header_kv, std::string &str)
     {
-        std::size_t pos = sub.find(": ");
+        std::size_t pos = str.find(": ");
         if (std::string::npos == pos)
         {
             return;
         }
-        std::string key = sub.substr(0, pos);
-        std::string value = sub.substr(pos+2);
+        std::string key = str.substr(0, pos);
+        std::string value = str.substr(pos+2);
         header_kv.insert({key, value});
     }
 
@@ -54,6 +54,18 @@ public:
         else
         {
             return "text/html";
+        }
+    }
+    static std::string GetStatusLine(int code)
+    {
+        switch(code)
+        {
+        case 200:
+            return "HTTP/1.0 200 OK\r\n";
+        case 404:
+            return "HTTP/1.0 404 Not Found\r\n";
+        default:
+            return "HTTP/1.0 200 OK\r\n";
         }
     }
 };

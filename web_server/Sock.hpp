@@ -36,7 +36,7 @@ public:
 
         if (bind(sock, (struct sockaddr*)&local, sizeof(local)) < 0)
         {
-            LOG(Fatal, "bind listen sock error!");
+            LOG(Fatal, "bind sock error!");
             exit(BIND_ERROR);
         }
     }
